@@ -1,0 +1,11 @@
+Pré-requisitos
+usar xpdf versão 4.0
+Nodejs
+Usar o  esquema que já foi implementado (podemos discutir, caso haja uma ideia melhor).
+
+Para testar
+1- rode o arquivo mitsui.js. 
+	O arquivo de teste de encontra na pa ..\arquivos_teste\pdf_por_seguradora\mitsui
+2 - Analise o resultado da conversão
+
+3 - O teste irá mostrar os campos que não foram encontrados ou estão em vazio
