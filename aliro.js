@@ -94,7 +94,6 @@ pdfUtil.process(pdf_path, options, function (err, data) {
                         if (ArrayString.length > 0)
                         {
                             json.client.address.street = ArrayString[0].trim();
-                            json.client.address.number = "--";
                             
                             var numbersInString = ArrayString[0].match(/^\d+|\d+\b|\d+(?=\w)/g);
 
