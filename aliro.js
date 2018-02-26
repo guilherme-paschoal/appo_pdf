@@ -93,11 +93,13 @@ pdfUtil.process(pdf_path, options, function (err, data) {
 
                         if (ArrayString.length > 0)
                         {
-                            var temp = ArrayString[0].split(",");
-                            if (temp.length > 0)
-                                json.client.address.street = temp[0].trim();
-                            if (temp.length > 1) {
-                                json.client.address.number = temp[1].trim();
+                            json.client.address.street = ArrayString[0].trim();
+                            json.client.address.number = "--";
+                            
+                            var numbersInString = ArrayString[0].match(/^\d+|\d+\b|\d+(?=\w)/g);
+
+                            if(numbersInString.length > 0) {
+                                json.client.address.number = numbersInString[0];
                             }
                         }
 
