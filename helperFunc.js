@@ -111,7 +111,11 @@ module.exports = {
                 if (fractionPart > 0) {
                     result = integerPart + fractionPart / 100;
                 } else {
-                    result = integerPart;
+                    if(isNaN(integerPart)) {
+                        result = 0 
+                    } else {
+                        result = integerPart;
+                    }
                 }
             }
         } else {
