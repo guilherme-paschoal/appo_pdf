@@ -3,28 +3,34 @@
 const fs = require('fs');
 
 let dirtyArray = [];
+let extractionErrors = [];
 
 // Classe que contem o resultado da chamada de um dos metodos de leitura cujo nome começam com "read"
 class ExtractionResult {
 
-  constructor(values) {
+  constructor(values, hasValues) {
     this.values = values;
+    this.hasValues = hasValues;
   }
 
   // O "values" dessa classe é sempre um array. Pega o item do Array de acordo com o indice.
   getValue(index) {
-    if(this.values.length == 0) { throw "Values needs to be  an array"; }
-    if(this.values[index]) {
-      return this.values[index].trim();
+    if(this.hasValues){
+      if(this.values.length == 0) { throw "Values needs to be  an array"; }
+      if(this.values[index]) {
+        return this.values[index].trim();
+      }
     }
     return "";
   }
 
   // Sobrecarga do metodo getValue. Caso seja forncedido um "textToRemove", essa string será removida da string retornada.
   getValue(index, textToRemove) {
-    if(this.values.length == 0) { throw "Values needs to be  an array"; }
-    if(this.values[index]) {
-      return this.values[index].replace(textToRemove, "").trim();
+    if(this.hasValues){
+      if(this.values.length == 0) { throw "Values needs to be  an array"; }
+      if(this.values[index]) {
+        return this.values[index].replace(textToRemove, "").trim();
+      }
     }
     return "";
   }
@@ -41,6 +47,10 @@ class ExtractionResult {
 module.exports = {
   getDirtyArray: function() {
     return dirtyArray;
+  },
+
+  getExtractionErrors: function() {
+    return extractionErrors;
   },
 
   // Cria arquivo temporario que ira conter o PDF em forma de texto
@@ -87,7 +97,7 @@ module.exports = {
     }
 
     if(i == -1) {
-      throw "Não foi possível encontrar a string: " + text
+      extractionErrors.push("Não foi possível encontrar a string: " + text);
     }
     return i;
   },
@@ -123,7 +133,11 @@ module.exports = {
 
   // Retorna ExtractionResult de campos cuja linha corresponde ao indice passado, dentro do array passado
   getDataArrayByLineIndex: function(arr, i) {
-    return new ExtractionResult(arr[i].trim().split('||'));
+    if(i > -1) {
+      return new ExtractionResult(arr[i].trim().split('||'), true);
+    } else {
+      return new ExtractionResult(null, false);
+    }
   },
 
   // Pega os valores da proxima linha (quando os campos tem o titulo em cima e o valor em baixo)

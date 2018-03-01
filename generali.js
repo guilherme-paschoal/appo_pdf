@@ -16,7 +16,6 @@ pdfUtil.process(pdf_path, options, function (err, data) {
   extraction.generateFileFromString(data.toLowerCase());
   
   let arr = extraction.generateArrayOfTextLines();
-  arr = extraction.cleanLinesUp(arr);
 
   let json = { client: { address: {} }, policy: {
       insuranceId: "???????????????",
