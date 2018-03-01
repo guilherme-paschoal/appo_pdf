@@ -112,7 +112,7 @@ pdfUtil.process(pdf_path, options, function (err, data) {
     result = extraction.readLineData(section, "prêmio à vista||r$");
     json.policy.price = helperFunc.stringToNum(result.getValue(2));
 
-    //extraction.deleteTempFile();
+    extraction.deleteTempFile();
 
     console.log(json);
     helperFunc.validateJsonFields(json, function (err, data) {
