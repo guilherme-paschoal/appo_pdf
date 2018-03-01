@@ -2,6 +2,8 @@
 
 const fs = require('fs');
 
+let dirtyArray = [];
+
 // Classe que contem o resultado da chamada de um dos metodos de leitura cujo nome começam com "read"
 class ExtractionResult {
 
@@ -37,6 +39,9 @@ class ExtractionResult {
 }
 
 module.exports = {
+  getDirtyArray: function() {
+    return dirtyArray;
+  },
 
   // Cria arquivo temporario que ira conter o PDF em forma de texto
   generateFileFromString: function(data) {
@@ -52,23 +57,27 @@ module.exports = {
     }
   },
 
-  // Le o arquivo gerando um array com todas as linhas do arquivo PDF
-  generateArrayOfTextLines: function() {
-    return require('fs').readFileSync('temp_read.tmp', 'utf-8').split('\n');
+   // Le o arquivo gerando um array com todas as linhas do arquivo PDF
+   generateArrayOfTextLines: function() {
+    return this.cleanLinesUp(require('fs').readFileSync('temp_read.tmp', 'utf-8').split('\n'));
   },
 
-  // Substitui qualquer "2 ou mais espaços" por "||"
-  cleanLinesUp: function(arr) {
+   // Substitui qualquer "2 ou mais espaços" por "||"
+   cleanLinesUp: function(arr) {
+    let newArr = [];
     for(let x=0; x<arr.length; x++) {
-      arr[x] = arr[x].replace(/\s\s+/g, '||');
+      if(arr[x].trim().length > 0) {
+        dirtyArray.push(arr[x].trim());
+        newArr.push(arr[x].trim().replace(/\s\s+/g, '||'));
+      }
     }
-    return arr;
+    
+    return newArr;
   },
 
   // Procura dentro do Array de linhas de texto do PDF, qual o indice da linha que contem o texto passado
   getLineIndexWithText: function(arr, text) {
     let i = -1;
-    let quit = false;
 
     for(let x=0; x<arr.length; x++) {
       if(arr[x].indexOf(text) > -1) {
@@ -79,6 +88,23 @@ module.exports = {
 
     if(i == -1) {
       throw "Não foi possível encontrar a string: " + text
+    }
+    return i;
+  },
+
+  // Procura dentro do Array de linhas de texto do PDF, qual o indice da linha que contem o texto passado na posicao pos
+  getLineIndexWithTextAt: function(arr, text, pos) {
+    let i = -1;
+
+    for(let x=0; x<arr.length; x++) {
+      if(arr[x].indexOf(text) == pos) {
+        i = x;
+        break;
+      }
+    }
+
+    if(i == -1) {
+      throw "Não foi possível encontrar a string: " + text + " na posição: " + pos;
     }
     return i;
   },
@@ -111,4 +137,20 @@ module.exports = {
     let ind = this.getLineIndexWithText(arr, text);
     return this.getDataArrayByLineIndex(arr, ind);
   },
-};
+
+  getWordAt(str, pos) {
+
+    // Search for the word's beginning and end.
+    var left = str.slice(0, pos + 1).search(/\S+$/),
+        right = str.slice(pos).search(/\s\s/); // the end of a word in our case is delimited by 2 space characters
+
+    // The last word in the string is a special case.
+    if (right < 0) {
+        return str.slice(left);
+    }
+
+    // Return the word, using the located bounds to extract it from the string.
+    return str.slice(left, right + pos);
+  }
+
+}; 
