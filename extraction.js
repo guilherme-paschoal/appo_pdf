@@ -114,7 +114,7 @@ module.exports = {
     }
 
     if(i == -1) {
-      throw "Não foi possível encontrar a string: " + text + " na posição: " + pos;
+      extractionErrors.push("Não foi possível encontrar a string: " + text);
     }
     return i;
   },
