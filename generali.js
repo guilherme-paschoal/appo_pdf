@@ -1,6 +1,6 @@
 "use strict";
 
-const pdf_path = './arquivos_teste/pdf_por_seguradora/generali/generali1.pdf';
+const pdf_path = './arquivos_teste/pdf_por_seguradora/generali/generali3.pdf';
 const pdfUtil = require("./patricio-pdf-to-text/extract-text");
 const extraction = require('./extraction');
 const helperFunc = require("./helperFunc");
@@ -32,10 +32,11 @@ pdfUtil.process(pdf_path, options, function (err, data) {
   let section;
 
   try {
-
+    
+    result = extraction.readLineData(arr, "apólice de seguro generali auto nº");
+    json.policy.policyNumber = result.getValue(1);
+        
     section = extraction.getArrayOfTextLinesInSection(arr, "dados do seguro", "dados do estipulante");
-    result = extraction.readNextLineData(section, "produto||sucursal||proposta nº||código de identificação");
-    json.policy.policyNumber = result.getCleanValue(2);
 
     result = extraction.readNextLineData(section, "vigência||contrato");
     let dates = result.getValue(0).split(' até 24 horas do dia ');

@@ -29,7 +29,7 @@ pdfUtil.process(pdf_path, options, function (err, data) {
     console.log("Não achei o arquivo");
     return err;
   }
-
+  
   try {
 
     let result;
@@ -73,7 +73,7 @@ pdfUtil.process(pdf_path, options, function (err, data) {
     result = extraction.readNextLineData(arr, "telefone||telefone (outros)||telefone celular");
     json.client.phone = result.getCleanValue(result.values.length - 1);
 
-    section = extraction.getArrayOfTextLinesInSection(arr, "dados do veículo", "acessórios e sistemas de segurança");
+    section = extraction.getArrayOfTextLinesInSection(arr, "dados do veículo", "categoria tarifária do veículo segurado");
 
     result = extraction.readNextLineData(section, "marca / modelo");
     json.policy.brand = "";
