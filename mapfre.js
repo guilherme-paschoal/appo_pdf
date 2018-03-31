@@ -1,12 +1,15 @@
 "use strict";
 
-const pdf_path = './arquivos_teste/pdf_por_seguradora/mapfre/mapfre1.pdf';
+const pdf_path = './arquivos_teste/pdf_por_seguradora/mapfre/mapfre2.pdf';
 const pdfUtil = require("./patricio-pdf-to-text/extract-text");
 const extraction = require('./extraction');
 const helperFunc = require("./helperFunc");
 
 const options = {
+  from: '1',
+  to: '4',
   layout: '-table',
+  fixed: '2', 
   encoding: 'UTF-8',
   lineprinter: false,
   nodiagonal: true
@@ -16,7 +19,7 @@ pdfUtil.process(pdf_path, options, function (err, data) {
 
   extraction.generateFileFromString(data.toLowerCase());
   
-  let arr = extraction.generateArrayOfTextLines();
+  let arr = extraction.generateArrayOfTextLinesForTwoPagesAtOnce(218);
   // arr = extraction.cleanLinesUp(arr);
 
   let json = { client: { address: {} }, policy: {

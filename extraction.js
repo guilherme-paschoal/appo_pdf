@@ -72,6 +72,25 @@ module.exports = {
     return this.cleanLinesUp(require('fs').readFileSync('temp_read.tmp', 'utf-8').split('\n'));
   },
 
+  generateArrayOfTextLinesForTwoPagesAtOnce: function(halfPageIndex) {
+    var arr = require('fs').readFileSync('temp_read.tmp', 'utf-8').split('\n');
+    var newArr = this.splitAndMoveSecondPageToEndOfArray(arr, halfPageIndex);
+    return this.cleanLinesUp(newArr);
+  },
+
+  splitAndMoveSecondPageToEndOfArray:function(arr, halfPageIndex) {
+    let leftArr = [];
+    let rightArr = [];
+    for(let x=0; x<arr.length; x++) {
+      if(arr[x].trim().length > 0) {
+        leftArr.push(arr[x].substring(0,halfPageIndex-1));
+        rightArr.push(arr[x].substring(halfPageIndex));
+      }
+    }
+    
+    return leftArr.concat(rightArr);
+  },
+
    // Substitui qualquer "2 ou mais espaços" por "||"
    cleanLinesUp: function(arr) {
     let newArr = [];
@@ -84,6 +103,7 @@ module.exports = {
     
     return newArr;
   },
+  
 
   // Procura dentro do Array de linhas de texto do PDF, qual o indice da linha que contem o texto passado
   getLineIndexWithText: function(arr, text) {

@@ -26,6 +26,11 @@ module.exports.process = function (pdf_path, options, callback) {
     if (options) {
         if (options.layout)
             args.push(options.layout);
+
+        if (options.fixed){
+            args.push('-fixed');
+            args.push(options.fixed);
+        }
         //    args.push('1');
         if (options.encoding) {
             args.push('-enc');
