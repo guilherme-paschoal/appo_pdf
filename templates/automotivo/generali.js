@@ -1,9 +1,9 @@
 "use strict";
 
-const pdf_path = './arquivos_teste/pdf_por_seguradora/generali/generali3.pdf';
-const pdfUtil = require("./patricio-pdf-to-text/extract-text");
-const extraction = require('./extraction');
-const helperFunc = require("./helperFunc");
+const pdf_path = '../../apolices/arquivos_automotivo/generali/generali3.pdf';
+const pdfUtil = require("../../pdf-to-text/extract-text");
+const extraction = require('../../pdf-to-text/extraction');
+const helperFunc = require("../../pdf-to-text/helperFunc");
 
 const options = {
   layout: '-simple',

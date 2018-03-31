@@ -1,10 +1,9 @@
-//(function () {
 "use strict";
-var pdf_path = './arquivos_teste/pdf_por_seguradora/aliro/aliro2.pdf';
-//var pdf_path = './ImportacaodePDF/ModeloLibertyAuto.pdf';
-var pdfUtil = require("./patricio-pdf-to-text/extract-text");
 
-var helperFunc = require("./helperFunc");
+const pdf_path = '../../apolices/arquivos_automotivo/aliro/aliro1.pdf';
+const pdfUtil = require("../../pdf-to-text/extract-text");
+const helperFunc = require("../../pdf-to-text/helperFunc");
+
 var newLineindicator = "<br>";
 //Fields to process
 /*CLIENT*/

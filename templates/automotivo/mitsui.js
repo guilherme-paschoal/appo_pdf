@@ -1,9 +1,11 @@
 //(function () {
 "use strict";
-var pdf_path = './arquivos_teste/pdf_por_seguradora/mitsui/1 (1).pdf';
-//var pdf_path = './ImportacaodePDF/ModeloLibertyAuto.pdf';
-var pdfUtil = require("./patricio-pdf-to-text/extract-text");
-var helperFunc = require("./helperFunc");
+
+const pdf_path = '../../apolices/arquivos_automotivo/mitsui/1 (1).pdf';
+const pdfUtil = require("../../pdf-to-text/extract-text");
+const extraction = require('../../pdf-to-text/extraction');
+const helperFunc = require("../../pdf-to-text/helperFunc");
+
 var newLineindicator = "<br>";
 //Fields to process
 /*CLIENT*/
