@@ -105,7 +105,7 @@ module.exports = {
                     }
                     //console.log("fractions part", fractionPart);
                 }
-                var tempIntegerPart = numSplited[0].replace(".", "");
+                var tempIntegerPart = numSplited[0].replace(/\./g, ""); // replaces all occurencies of ".". if you just call straight with a string, only the first occurrency will be replaced.
                 var integerPart = parseInt(tempIntegerPart, 10);
                 var numLength = tempIntegerPart.length;
                 if (fractionPart > 0) {

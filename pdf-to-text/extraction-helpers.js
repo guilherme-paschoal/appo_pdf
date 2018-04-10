@@ -139,6 +139,7 @@ module.exports = {
     return i;
   },
 
+
   // Retorna um Array de linhas de texto entre as linhas que contem os valores de "Start" e "End". Isso é importante para delimitar a pesquisa no texto
   // melhorando o desempenho e garantindo a precisão na pesquisa do texto.
   getArrayOfTextLinesInSection(arr, start, end) {
