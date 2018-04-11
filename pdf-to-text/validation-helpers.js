@@ -28,7 +28,8 @@ var requiredFieldsResidencial = [{
 }, {
   name: "client",
   secondField: "address",
-  keys: [{
+  keys: [
+  {
     field: "street",
     name: "endereço"
   }, {

@@ -167,6 +167,16 @@ module.exports = {
     return this.getDataArrayByLineIndex(arr, ind + 1);
   },
 
+  // Pega os valores da proxima linha (quando os campos tem o titulo em cima e o valor em baixo)
+  readNextMultiLineData: function(arr, text, lines) {
+    let tempArr = [];
+    let ind = this.getLineIndexWithText(arr, text);
+    for(let i=1;i<=lines;i++) {
+      tempArr.push(this.getDataArrayByLineIndex(arr, ind + i));
+    }
+    return tempArr;
+  },
+
   // Pega os dados de um linha que contem o texto passado, dentro do array passado.
   readLineData: function(arr, text) {
     let ind = this.getLineIndexWithText(arr, text);
