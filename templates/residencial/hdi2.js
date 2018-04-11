@@ -78,6 +78,9 @@ pdfUtil.process(pdf_path, options, function (err, data) {
     json.policy.riskState = result.getValue(1, "uf: ");
     json.policy.riskPostalCode = result.getValue(2, "cep: ");
 
+    result = extraction.readLineData(arr, "prêmio total:");
+    json.policy.price = helperFunc.stringToNum(result.getValue(1));
+
     result = extraction.readLineData(arr, "incendio/raio/explosao/queda de aeronave");
     json.policy.basicCoverage = helperFunc.stringToNum(result.getValue(1));
 
