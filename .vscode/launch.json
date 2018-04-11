@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/templates/residencial/itau.js"
+      "program": "${workspaceFolder}/templates/residencial/sulamerica.js"
     }
   ]
 }

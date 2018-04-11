@@ -93,7 +93,7 @@ pdfUtil.process(pdf_path, options, function (err, data) {
     json.policy.theftCoverage = helperFunc.stringToNum(result.getValue(1).replace('r$',''));
 
     result = extraction.readLineData(arr, "vendaval e granizo");
-    json.policy.windCoverage = helperFunc.stringToNum(result.getValue(1).replace('r$',''));
+    json.policy.windDamageCoverage = helperFunc.stringToNum(result.getValue(1).replace('r$',''));
 
     result = extraction.readLineData(arr, "danos elétricos");
     json.policy.electricalDamageCoverage = helperFunc.stringToNum(result.getValue(1).replace('r$',''));
