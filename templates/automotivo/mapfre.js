@@ -19,7 +19,7 @@ pdfUtil.process(pdf_path, options, function (err, data) {
 
   extraction.generateFileFromString(data.toLowerCase());
   
-  let arr = extraction.generateArrayOfTextLinesForTwoPagesAtOnce(218);
+  let arr = extraction.generateArrayOfTextLinesForTwoPagesAtOnceWithoutDelimiter(218);
   // arr = extraction.cleanLinesUp(arr);
 
   let json = { client: { address: {} }, policy: {
