@@ -1,6 +1,6 @@
 "use strict";
 
-const pdf_path = './apolices/arquivos_residencial/hdi_2/hdi_2_1.pdf'; // ESSE CAMINHO DEVE SER "INICIADO" NO ROOT POIS O PDFTOTEXT PEGA A PARTIR DO ROOT
+const pdf_path = '../../apolices/arquivos_residencial/hdi_2/hdi_2_1.pdf'; // ESSE CAMINHO DEVE SER "INICIADO" NO ROOT POIS O PDFTOTEXT PEGA A PARTIR DO ROOT
 const pdfUtil = require("../../pdf-to-text/extract-text");
 const extraction = require('../../pdf-to-text/extraction-helpers');
 const helperFunc = require("../../pdf-to-text/helperFunc");

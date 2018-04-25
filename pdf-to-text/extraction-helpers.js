@@ -67,15 +67,40 @@ module.exports = {
     }
   },
 
+  
    // Le o arquivo gerando um array com todas as linhas do arquivo PDF
-   generateArrayOfTextLines: function() {
+  generateArrayOfTextLines: function() {
     return this.cleanLinesUp(require('fs').readFileSync('temp_read.tmp', 'utf-8').split('\n'));
   },
 
-  generateArrayOfTextLinesForTwoPagesAtOnce: function(halfPageIndex) {
+  generateArrayOfTextLinesForTwoPagesAtOnce: function(halfPageIndex, delimiterString) {
     var arr = require('fs').readFileSync('temp_read.tmp', 'utf-8').split('\n');
-    var newArr = this.splitAndMoveSecondPageToEndOfArray(arr, halfPageIndex);
+    var newArr = this.splitAndOrderPages(arr, halfPageIndex, delimiterString);
     return this.cleanLinesUp(newArr);
+  },
+
+  splitAndOrderPages:function(arr, halfPageIndex, delimiterString)
+  {
+    let leftArr = [];
+    let rightArr = [];
+    let finalArr = [];
+
+    for(let x=0; x<arr.length; x++) {
+      if(arr[x].trim().length == 0)
+        continue;
+
+      if(arr[x].indexOf(delimiterString) > -1) {
+        finalArr = finalArr.concat(leftArr);
+        finalArr = finalArr.concat(rightArr);
+        leftArr = [];
+        rightArr = [];
+      } else {
+          leftArr.push(arr[x].substring(0,halfPageIndex-1).trim());
+          rightArr.push(arr[x].substring(halfPageIndex).trim()); 
+      }
+    }
+    
+    return finalArr;
   },
 
   splitAndMoveSecondPageToEndOfArray:function(arr, halfPageIndex) {
@@ -164,6 +189,12 @@ module.exports = {
   // Pega os valores da proxima linha (quando os campos tem o titulo em cima e o valor em baixo)
   readNextLineData: function(arr, text) {
     let ind = this.getLineIndexWithText(arr, text);
+    
+    // Esse if é necessario para não "mascarar" quando o indice retornar como -1 (nao encontrado). 
+    // Se ele nao existisse, o valor -1 nunca seria passado para a funcao
+    if(ind == -1)
+      return this.getDataArrayByLineIndex(arr, -1);
+
     return this.getDataArrayByLineIndex(arr, ind + 1);
   },
 

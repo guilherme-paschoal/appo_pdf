@@ -46,7 +46,7 @@ pdfUtil.process(pdf_path, options, function (err, data) {
 
     result = extraction.readNextLineData(section, "endereço");
     json.client.address.street = result.getValue(0);
-    json.client.address.number = result.getValue(0).indexOf(',') ? result.getValue(0).split(',')[1].trim() : "";
+    json.client.address.number = result.getValue(0).indexOf(',') > -1? result.getValue(0).split(',')[1].trim() : "";
 
     result = extraction.readNextLineData(section, "bairro||cep||e-mail");
     json.client.address.neighborhood = result.getValue(0);
