@@ -73,6 +73,12 @@ module.exports = {
     return this.cleanLinesUp(require('fs').readFileSync('temp_read.tmp', 'utf-8').split('\n'));
   },
 
+  generateArrayOfTextLinesForTwoPagesAtOnceWithoutDelimiter: function(halfPageIndex) {
+    var arr = require('fs').readFileSync('temp_read.tmp', 'utf-8').split('\n');
+    var newArr = this.splitAndMoveSecondPageToEndOfArray(arr, halfPageIndex);
+    return this.cleanLinesUp(newArr);
+  },
+
   generateArrayOfTextLinesForTwoPagesAtOnce: function(halfPageIndex, delimiterString) {
     var arr = require('fs').readFileSync('temp_read.tmp', 'utf-8').split('\n');
     var newArr = this.splitAndOrderPages(arr, halfPageIndex, delimiterString);
