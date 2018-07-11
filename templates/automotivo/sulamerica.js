@@ -1,6 +1,6 @@
 "use strict";
 
-const pdf_path = '../../apolices/arquivos_automotivo/sulamerica/sulamerica1.pdf';
+const pdf_path = '../../apolices/arquivos_automotivo/sulamerica/sulamerica2.pdf';
 const pdfUtil = require("../../pdf-to-text/extract-text");
 const extraction = require('../../pdf-to-text/extraction-helpers');
 const helperFunc = require("../../pdf-to-text/helperFunc");
