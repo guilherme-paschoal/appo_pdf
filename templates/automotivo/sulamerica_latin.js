@@ -1,6 +1,6 @@
 "use strict";
 
-const pdf_path = '../../apolices/arquivos_automotivo/sulamerica/sulamerica2.pdf';
+const pdf_path = '../../apolices/arquivos_automotivo/sulamerica/sulamerica1.pdf';
 const pdfUtil = require("../../pdf-to-text/extract-text");
 const extraction = require('../../pdf-to-text/extraction-helpers');
 const helperFunc = require("../../pdf-to-text/helperFunc");
@@ -70,15 +70,15 @@ pdfUtil.process(pdf_path, options, function (err, data) {
     json.policy.chassis = result.getValue(0, "chassi: ");
     json.policy.plate = result.getValue(1, "placa: ");
     
-    section = extraction.getArrayOfTextLinesInSection(arr, "garantias contratadas e prmios", "franquias e descontos");
+    section = extraction.getArrayOfTextLinesInSection(arr, "garantias contratadas", "franquias e descontos");
     result = extraction.readLineData(section, "cobertura para terceiros (danos materiais)");
     json.policy.thirdPartyMaterialDamages = helperFunc.stringToNum(result.getValue(2));
 
     result = extraction.readLineData(section, "cobertura para terceiros (danos corporais)");
     json.policy.thirdPartyBodyDamages = helperFunc.stringToNum(result.getValue(2));
 
-    result = extraction.readLineData(arr, "prmio total");
-    json.policy.price = helperFunc.stringToNum(result.getValue(3));
+    result = extraction.readLineData(arr, "prmio total||-");
+    json.policy.price = helperFunc.stringToNum(result.getValue(2));
 
     section = extraction.getArrayOfTextLinesInSection(arr, "franquias e descontos", "forma de pagamento do prmio");
     result = extraction.readLineData(section, "veculo:");

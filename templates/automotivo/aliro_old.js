@@ -1,6 +1,6 @@
 "use strict";
 
-const pdf_path = '../../apolices/arquivos_automotivo/aliro/aliro3.pdf';
+const pdf_path = '../../apolices/arquivos_automotivo/aliro/aliro5.pdf';
 const pdfUtil = require("../../pdf-to-text/extract-text");
 const helperFunc = require("../../pdf-to-text/helperFunc");
 

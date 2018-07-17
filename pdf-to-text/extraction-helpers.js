@@ -177,6 +177,8 @@ module.exports = {
     let startIndex = this.getLineIndexWithText(arr, start);
     let endIndex = this.getLineIndexWithText(arr, end);
     let items = [];
+
+    if(startIndex == -1 || endIndex == -1) { return items; }
     for(let x=startIndex+1;x<endIndex;x++) {
       items.push(arr[x]);
     }
